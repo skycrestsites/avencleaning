@@ -1,0 +1,10 @@
+# Source material (not part of the deployed site)
+Stock images/
+style 3/
+*.csv
+ACC_logo.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
