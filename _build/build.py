@@ -606,7 +606,7 @@ def build_home():
       <h1 class="font-serif text-5xl italic leading-[1.05] text-slate-900 md:text-6xl xl:text-7xl">A Higher Standard of <span class="not-italic font-black text-primary">Clean.</span></h1>
       <p class="mt-8 max-w-xl border-l-2 border-accent pl-6 text-lg font-light leading-relaxed text-slate-600 md:text-xl">Reliable, detail-driven residential and commercial cleaning for busy homeowners, families, hosts and businesses across the Las Vegas valley. Background-checked cleaners, straightforward pricing and booking that takes a minute.</p>
       <div class="mt-10 flex flex-col gap-4 sm:flex-row">
-        <a href="{root}book/" class="inline-flex h-14 items-center justify-center gap-2 bg-primary px-8 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-primary-dark">Book Online <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+        <a href="#book" class="inline-flex h-14 items-center justify-center gap-2 bg-primary px-8 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-primary-dark">Book Online <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
         <a href="{root}services/" class="inline-flex h-14 items-center justify-center gap-2 border border-primary px-8 text-xs font-bold uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-white">View Services</a>
       </div>
       <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-600">
@@ -692,10 +692,38 @@ def build_home():
       </li>''' for n, i, t, d in steps)}
     </ol>
     <div class="mt-12 text-center">
-      <a href="{root}book/" class="inline-flex h-14 items-center justify-center gap-2 bg-primary px-10 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-primary-dark">Get Your Instant Price <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+      <a href="#book" class="inline-flex h-14 items-center justify-center gap-2 bg-primary px-10 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-primary-dark">Get Your Instant Price <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
     </div>
   </div>
 </section>
+"""
+    booking = f"""
+<section class="bg-stone-50 border-y border-stone-200" id="book">
+  <div class="mx-auto max-w-7xl px-5 py-16 md:px-10 lg:px-12 lg:py-20">
+    <div class="mx-auto mb-10 max-w-2xl text-center">
+      <span class="mb-4 block text-xs font-bold uppercase tracking-[0.3em] text-accent">Online Booking</span>
+      <h2 class="font-serif text-4xl italic text-primary md:text-5xl">Book your <span class="not-italic font-black">cleaning</span></h2>
+      <p class="mt-5 font-light leading-relaxed text-slate-600">Choose your service, home size and any extras — see your price instantly, then pick the date and time that works for you.</p>
+    </div>
+    <div class="mx-auto max-w-5xl border-y border-stone-200 bg-white sm:border sm:shadow-xl">
+      <iframe
+        id="home-booking-frame"
+        src="{BOOK_EMBED}"
+        title="Aven Cleaning Co. online booking form"
+        class="home-booking-frame block w-full"
+        scrolling="yes"
+        allow="payment"
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="lazy"></iframe>
+    </div>
+    <p class="mt-5 text-center text-xs text-slate-500">Trouble loading? <a class="underline hover:text-primary" href="{BOOK_URL}" target="_blank" rel="noopener">Open the booking form in a new tab</a> or email <a class="underline hover:text-primary" href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+  </div>
+</section>
+<style>
+  /* Home page booking iframe — viewport-based height, internal scrolling, no embed.js */
+  .home-booking-frame {{ height: calc(100vh - 120px); height: calc(100svh - 120px); min-height: 620px; border: 0; }}
+  @media (min-width: 768px) {{ .home-booking-frame {{ height: calc(100vh - 160px); height: calc(100svh - 160px); min-height: 720px; }} }}
+</style>
 """
     areas = f"""
 <section class="relative overflow-hidden bg-primary-dark text-white" id="areas">
@@ -740,13 +768,13 @@ def build_home():
         <span class="material-symbols-outlined text-4xl text-accent" aria-hidden="true">rate_review</span>
         <h3 class="mt-4 font-serif text-2xl text-primary">Join our happy clients</h3>
         <p class="mt-2 text-sm font-light text-slate-600">Book your first cleaning and see why Las Vegas homeowners keep coming back.</p>
-        <a href="{root}book/" class="mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary hover:text-accent">Book now <span class="material-symbols-outlined text-base" aria-hidden="true">east</span></a>
+        <a href="#book" class="mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary hover:text-accent">Book now <span class="material-symbols-outlined text-base" aria-hidden="true">east</span></a>
       </div>
     </div>
   </div>
 </section>
 """
-    body = hero + trust_bar() + services + about + how + areas + reviews + cta_band(root)
+    body = hero + trust_bar() + services + about + how + booking + areas + reviews + cta_band(root)
     ld = [LOCAL_BUSINESS,
           {"@context": "https://schema.org", "@type": "WebSite", "name": BRAND, "url": SITE_URL + "/"}]
     page("index.html", root, f"{BRAND} | House & Commercial Cleaning in Las Vegas, NV",
