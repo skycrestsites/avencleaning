@@ -451,7 +451,7 @@ def footer(root):
       <div class="flex flex-wrap gap-x-6 gap-y-2">
         <a class="hover:text-accent" href="{root}privacy-policy/">Privacy Policy</a>
         <a class="hover:text-accent" href="{root}terms/">Terms of Service</a>
-        <a class="hover:text-accent" href="{root}sitemap.xml">Sitemap</a>
+        <a class="hover:text-accent" href="/sitemap.xml">Sitemap</a>
       </div>
     </div>
   </div>
